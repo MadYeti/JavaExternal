@@ -1,5 +1,8 @@
 package game;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 /**
  * Created by MadYeti on 06.02.2020.
  */
@@ -100,6 +103,40 @@ public class GameController {
             return true;
         }else{
             return false;
+        }
+    }
+
+    public void playGame(){
+        //to change range write rand(int min, int max)
+        //written rand() automatically set up range from 0 to 100
+        this.rand(5, 15);
+
+        while(!this.getNumberIsFind()) {
+            int number = 0;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                number = Integer.parseInt(bufferedReader.readLine());
+                if(!this.isNumberInsideRange(number, this.getLowerLimit(), this.getHigherLimit())){
+                    this.printOutOfRangeMessage();
+                }else if(this.isNumberWasPicked(number)){
+                    this.printNumberAlreadyBeenPickedMessage();
+                }else {
+                    if(number > this.getNumberToFind()){
+                        this.printPickedNumberIsUpwardMessage();
+                    }else if(number < this.getNumberToFind()){
+                        this.printPickedNumberIsUnderMessage();
+                    }else {
+                        this.printCongratulationMessage();
+                        this.setNumberIsFind(true);
+                    }
+                    this.setGuessNumber(number);
+                    this.addMentionedNumberToList(number);
+                    this.increaseTriesAmount();
+                    this.updateView();
+                }
+            } catch (Exception e) {
+                this.printIncorrectInputTypeMessage();
+            }
         }
     }
 }
