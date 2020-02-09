@@ -14,6 +14,7 @@ public class Main {
         GameView view = new GameView();
         GameController controller = new GameController(view, model);
         controller.playGame();
+
     }
 
 }
