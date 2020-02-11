@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by MadYeti on 06.02.2020.
@@ -12,28 +13,24 @@ public class GameModel {
     private int numberToFind;
     private int guessNumber;
     private int triesAmount;
-    private boolean numberIsFind;
-    private ArrayList<Integer> mentionedNumbers = null;
+    private boolean isNumberFinded;
+    private List<Integer> mentionedNumbers = null;
 
     public GameModel(){
-        numberIsFind = false;
+        isNumberFinded = false;
         triesAmount = 0;
         mentionedNumbers = new ArrayList<Integer>();
     }
 
-    public void setNumberIsFind(boolean numberIsFind){
-        this.numberIsFind = numberIsFind;
-    }
-
-    public boolean getNumberIsFind(){
-        return numberIsFind;
+    public boolean isNumberFinded(){
+        return isNumberFinded;
     }
 
     public int getNumberToFind() {
         return numberToFind;
     }
 
-    public ArrayList<Integer> getMentionedNumbers(){
+    public List<Integer> getMentionedNumbers(){
         return mentionedNumbers;
     }
 
@@ -77,4 +74,10 @@ public class GameModel {
         this.guessNumber = guessNumber;
     }
 
+    public boolean checkNumberIsFinded(int guessNumber){
+        if(numberToFind == guessNumber){
+            return true;
+        }
+        return false;
+    }
 }

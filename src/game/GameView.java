@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by MadYeti on 06.02.2020.
@@ -36,7 +37,7 @@ public class GameView {
         System.out.println("Введенный номер меньше загаданного. Повторите попытку");
     }
 
-    public void printGameDetails(int choosenNumber, ArrayList<Integer> mentionedNumbers, int lowerLimit, int higherLimit, int triesAmount){
+    public void printGameDetails(int choosenNumber, List<Integer> mentionedNumbers, int lowerLimit, int higherLimit, int triesAmount){
         System.out.println("Вы выбрали число: " + choosenNumber);
         System.out.println("Номера, которые вы уже выбирали: " + Arrays.toString(mentionedNumbers.toArray()));
         System.out.println("Загаданное число находиться в диапазоне: [" + lowerLimit + ", " + higherLimit + "]");
