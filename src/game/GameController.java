@@ -74,28 +74,30 @@ public class GameController {
         while(!model.isNumberFinded()) {
             try {
                 number = Integer.parseInt(bufferedReader.readLine());
+                if(isNumberInsideRange(number, model.getLowerLimit(), model.getHigherLimit())){
+                    model.setGuessNumber(number);
+                    if(!isNumberWasPicked(number)){
+                        model.addMentionedNumberToList(number);
+                        model.increaseTriesAmount();
+                        if(model.checkNumberIsFinded(number)){
+                            model.setNumberFinded(true);
+                            view.printCongratulation();
+                        }else if(number > model.getNumberToFind()){
+                            view.printPickedNumberIsUpward();
+                        }else {
+                            view.printPickedNumberIsUnder();
+                        }
+                    }else{
+                        view.printNumberAlreadyBeenPicked();
+                    }
+                    updateView();
+                }else{
+                    view.printNumberOutOfRange();
+                }
             } catch (IOException e) {
                 view.printIncorrectInputType();
-            }
-            if(isNumberInsideRange(number, model.getLowerLimit(), model.getHigherLimit())){
-                model.setGuessNumber(number);
-                if(!isNumberWasPicked(number)){
-                    model.addMentionedNumberToList(number);
-                    model.increaseTriesAmount();
-                    if(model.checkNumberIsFinded(number)){
-                        model.setNumberFinded(true);
-                        view.printCongratulation();
-                    }else if(number > model.getNumberToFind()){
-                        view.printPickedNumberIsUpward();
-                    }else {
-                        view.printPickedNumberIsUnder();
-                    }
-                }else{
-                    view.printNumberAlreadyBeenPicked();
-                }
-                updateView();
-            }else{
-                view.printNumberOutOfRange();
+            } catch (NumberFormatException e){
+                view.printIncorrectInputType();
             }
         }
     }

@@ -11,11 +11,11 @@ import java.util.ResourceBundle;
 public class GameView {
 
     public static final ResourceBundle resourceBundle =
-            ResourceBundle.getBundle("messages", new Locale("messages_ua"));
+            ResourceBundle.getBundle("messages", new Locale("uk"));
 
     public static final String OPENS_SQUARE_BRACKET = "[";
     public static final String CLOSING_SQUARE_BRACKET = "]";
-    public static final String COMMA_SING = ", ";
+    public static final String COMMA_SING = ",";
 
     public static final String INPUT_LANGUAGE_NUMBER = "input.int.language.number";
     public static final String WRONG_RANGE_DATA = "wrong.range.data";
