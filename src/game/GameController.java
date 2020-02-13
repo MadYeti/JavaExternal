@@ -36,17 +36,15 @@ public class GameController {
     public boolean isNumberInsideRange(int number, int lowerRange, int higherRange){
         if(number <= higherRange && number >= lowerRange){
             return true;
-        }else{
-            return false;
         }
+        return false;
     }
 
     public boolean isNumberWasPicked(int number){
         if(model.getMentionedNumbers().contains(number)){
             return true;
-        }else{
-            return false;
         }
+        return false;
     }
 
     public void playGame(){
@@ -55,30 +53,49 @@ public class GameController {
         rand(5, 15);
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        view.printChooseLanguageOption();
+        int number = 0;
+        try {
+            number = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+            //TODO
+        }
+        switch(number){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+                break;
+        }
+
         while(!model.isNumberFinded()) {
-            int number = 0;
             try {
                 number = Integer.parseInt(bufferedReader.readLine());
             } catch (IOException e) {
                 view.printIncorrectInputType();
             }
-            if(!isNumberInsideRange(number, model.getLowerLimit(), model.getHigherLimit())){
-                view.printNumberOutOfRange();
-            }else if(isNumberWasPicked(number)){
-                view.printNumberAlreadyBeenPicked();
-            }else {
-                if(number > model.getNumberToFind()){
-                    view.printPickedNumberIsUpward();
-                }else if(number < model.getNumberToFind()){
-                    view.printPickedNumberIsUnder();
-                }else {
-                    view.printCongratulation();
-                    model.checkNumberIsFinded(number);
-                }
+            if(isNumberInsideRange(number, model.getLowerLimit(), model.getHigherLimit())){
                 model.setGuessNumber(number);
-                model.addMentionedNumberToList(number);
-                model.increaseTriesAmount();
+                if(!isNumberWasPicked(number)){
+                    model.addMentionedNumberToList(number);
+                    model.increaseTriesAmount();
+                    if(model.checkNumberIsFinded(number)){
+                        model.setNumberFinded(true);
+                        view.printCongratulation();
+                    }else if(number > model.getNumberToFind()){
+                        view.printPickedNumberIsUpward();
+                    }else {
+                        view.printPickedNumberIsUnder();
+                    }
+                }else{
+                    view.printNumberAlreadyBeenPicked();
+                }
                 updateView();
+            }else{
+                view.printNumberOutOfRange();
             }
         }
     }

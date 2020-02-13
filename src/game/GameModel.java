@@ -26,6 +26,10 @@ public class GameModel {
         return isNumberFinded;
     }
 
+    public void setNumberFinded(boolean isNumberFinded){
+        this.isNumberFinded = isNumberFinded;
+    }
+
     public int getNumberToFind() {
         return numberToFind;
     }
